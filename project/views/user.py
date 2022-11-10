@@ -40,9 +40,9 @@ class UserView(Resource):
         return "", 204
 
 
-@user_ns.route('/<int:uid>/password/')
+@user_ns.route('/password/')
 class UserChangePassword(Resource):
-    def put(self, uid):
+    def put(self):
         req_json = request.json
 
         password_1 = req_json.get('password_1')
@@ -50,10 +50,9 @@ class UserChangePassword(Resource):
 
         if not password_1 or not password_2:
             abort(400)
-
-        user = user_service.get_one(uid)
         password_1 = auth_service.get_hash(password_1)
-        if password_1 != user.password:
+        user = user_service.get_user_by_password(password_1)
+        if user is None:
             return {"error": "Пароль неверный"}, 401
 
         user.password = auth_service.get_hash(password_2)

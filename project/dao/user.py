@@ -29,3 +29,7 @@ class UserDAO:
     def get_user_by_email(self, email: str):
         user = self.session.query(User).filter(User.email == email).one_or_none()
         return user
+
+    def get_user_by_password(self, password: str):
+        user = self.session.query(User).filter(User.password == password).one_or_none()
+        return user

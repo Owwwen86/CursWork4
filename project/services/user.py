@@ -33,3 +33,6 @@ class UserService:
 
     def update_password(self, data):
         self.dao.update(data)
+
+    def get_user_by_password(self, password):
+        return self.dao.get_user_by_password(password)

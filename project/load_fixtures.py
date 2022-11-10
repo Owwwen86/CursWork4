@@ -7,7 +7,7 @@ from project.dao.model.movie import Movie
 
 from project.setup import db
 
-from app import create_app
+from project.app import create_app
 
 import json
 

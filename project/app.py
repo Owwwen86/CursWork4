@@ -1,5 +1,5 @@
 from flask_cors import CORS
-from flask import Flask
+from flask import Flask, render_template
 from flask_restx import Api
 
 from project.config import Config
@@ -13,6 +13,11 @@ from project.views.auth import auth_ns
 
 def create_app(config_object):
     app = Flask(__name__)
+
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+
     CORS(app)
     app.config.from_object(config_object)
     register_extensions(app)
